@@ -48,6 +48,10 @@ const headerLinks = reactive<HeaderLink[]>([
 
   &-logo {
     width: 102px;
+
+    @media screen and (max-width: 768px) {
+      width: 80px;
+    }
   }
 
   &-nav {
@@ -55,6 +59,13 @@ const headerLinks = reactive<HeaderLink[]>([
       &-item {
         &__link {
           color: #000;
+          &:hover {
+            text-decoration: underline;
+          }
+
+          @media screen and (max-width: 768px) {
+            font-size: 14px;
+          }
         }
       }
     }
