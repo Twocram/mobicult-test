@@ -30,7 +30,18 @@ export const useCardStore = defineStore("card", () => {
   function saveCards() {
     if (import.meta.client) {
       const toast = useToast();
-      localStorage.setItem("cards", JSON.stringify(cards.value));
+
+      const isAllCardsFilled = cards.value.every((card) => card.title.trim() !== "");
+
+      if (!isAllCardsFilled) {
+        toast.error("Заполните все карточки!", {
+          position: "bottom-right"
+        })
+
+        return
+      }
+
+      localStorage.setItem("cards", JSON.stringify(cards.value.map((card) => ({ ...card, title: card.title.trim() }))));
       broadcastChannel.postMessage({ action: "save" });
 
       toast.success("Данные сохранены!", {
