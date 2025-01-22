@@ -6,7 +6,7 @@
 
     <nav class="header-nav">
       <ul class="header-nav__list">
-        <li class="header-nav__list-item" v-for="link in headerLinks">
+        <li class="header-nav__list-item" v-for="link in headerLinks" :key="link.title">
           <nuxt-link class="header-nav__list-item__link" :to="link.to">{{
             link.title
           }}</nuxt-link>
@@ -59,6 +59,7 @@ const headerLinks = reactive<HeaderLink[]>([
       &-item {
         &__link {
           color: #000;
+
           &:hover {
             text-decoration: underline;
           }
